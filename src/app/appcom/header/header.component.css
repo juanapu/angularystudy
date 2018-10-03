@@ -1,0 +1,9 @@
+.active{
+	border: 1px solid #efebeb;
+	border-radius: 5px;
+}
+
+ul.nav{
+	padding-top: 2rem;
+	padding-bottom:  2rem;
+}

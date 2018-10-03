@@ -1,0 +1,5 @@
+<app-edit (add)="onAdd($event)"></app-edit>
+<hr>
+<ul class="list-group">
+	<app-s-list *ngFor="let ingredient of ingredients " [ingredient]="ingredient"></app-s-list>
+</ul>

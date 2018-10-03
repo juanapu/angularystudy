@@ -1,0 +1,21 @@
+<div class="card" *ngIf="recipe">
+	<img [src]="recipe.imagePath" alt="img">
+	<div class="card-body">
+		<h5 class="card-title">
+			{{recipe.name}}
+		</h5>
+		<app-dropdownbtn>
+			<a class="dropdown-item" (click)="onToShoppingList(recipe.ingredientArr)">To shopping list</a>
+			<a class="dropdown-item" routerLink="edit">Edit recipe</a>
+			<a class="dropdown-item">Delete recipe</a>	
+		</app-dropdownbtn>
+		<p class="card-text">
+			{{recipe.desc}}
+		</p>
+		<ul *ngIf="recipe.ingredientArr">
+			<li *ngFor="let recDetail of recipe.ingredientArr">
+				{{recDetail.name}}: {{recDetail.number}}
+			</li>
+		</ul>
+	</div>
+</div>

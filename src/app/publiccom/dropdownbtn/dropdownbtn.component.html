@@ -1,0 +1,8 @@
+<div class="dropdown">
+	<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="onToggleShow()">
+		Dropdown button
+	</button>
+	<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" [class.show]="btnshow">
+		<ng-content class="dropdown-item"></ng-content>	
+	</div>
+</div>

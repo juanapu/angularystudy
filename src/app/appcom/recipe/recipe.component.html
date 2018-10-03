@@ -1,0 +1,14 @@
+<div class="row">
+	<div class="col-md-12">
+			<button class="btn btn-primary" (click)="onNav()">new project</button>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<app-list *ngFor="let list of recipe; let i = index" [recipe]="list" [index]=i></app-list>
+	</div>
+	<div class="col-md-6">
+		<router-outlet></router-outlet>
+	</div>
+</div>
+
