@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef,EventEmitter,Output } from '@angular/core';
+import { Component, OnInit, ViewChild,EventEmitter,Output } from '@angular/core';
 import { Ingredient } from '../../../models/ingredient.model';
 import { ServiceIngredients } from '../../../services/ingredients.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit',
@@ -9,16 +10,64 @@ import { ServiceIngredients } from '../../../services/ingredients.service';
 })
 export class EditComponent implements OnInit {
 
-  @ViewChild('formvalue') formvalue: ElementRef;
+  @ViewChild('formvalue') formvalue: NgForm;
+
+  /* define variables */
+  statusEdit: boolean = false; /* define status = edit or not
+                                   statusEdit = true -> show Edit button, hide add button
+                                   statusEdit = false -> show add button hide Edit button
+                                   select an item -> statusEdit = true, 
+                                   click Edit button -> statusEdit = false
+                              */
+  selectedIngredient: Ingredient;
+  selectedIndex: number;
 
   constructor(private serviceIngredient: ServiceIngredients) { }
 
   ngOnInit() {
+    const _this = this;
+    this.serviceIngredient.statusEdit
+      .subscribe(
+          (val: boolean)=>{
+              _this.statusEdit = val;
+          }
+        );
+
+    this.serviceIngredient.selectedIngredients
+        .subscribe(
+          (val: number)=>{
+            if(val!==null){
+                _this.selectedIndex = val;
+                _this.selectedIngredient = _this.serviceIngredient.ingredients[val];
+                _this.formvalue.setValue({
+                  name: _this.selectedIngredient.name,
+                  amount: _this.selectedIngredient.number
+                });
+            }
+          }
+        );
+
   }
 
-  onAdd(val){
-  	const addIngredient = new Ingredient(this.formvalue.nativeElement[0].value,this.formvalue.nativeElement[1].value);
-  	this.serviceIngredient.onAdd(addIngredient);
+  onSubmit(form: NgForm){
+  	const addIngredient = new Ingredient(form.value.name,form.value.amount);
+    if(this.statusEdit){
+      this.serviceIngredient.onUpdate(addIngredient, this.selectedIndex);
+      this.serviceIngredient.selectedIngredients.emit(null); // remove all selectedIngredients
+    }else{
+      this.serviceIngredient.onAdd(addIngredient,this.statusEdit);
+    }
+  }
+
+  onDelete(){
+    this.serviceIngredient.onDelete(this.selectedIndex);
+    this.onClear();
+  }
+
+  onClear(){
+    this.formvalue.reset();
+    this.serviceIngredient.statusEdit.next(false);
+    this.serviceIngredient.selectedIngredients.emit(null);
   }
 
 }

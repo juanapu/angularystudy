@@ -1,21 +1,21 @@
-<form #formvalue>
+<form #formvalue="ngForm" (ngSubmit)="onSubmit(formvalue)">
 	<div class="form-row">
 			<div class="form-group col-md-6">
 				<label for="name">
 					Name		
 				</label>
-				<input type="text" name="name" class="form-control" id="name" placeholder="">
+				<input type="text" name="name" ngModel class="form-control" id="name" placeholder="">
 			</div>
 			<div class="form-group col-md-6">
 				<label for="amount">
 					Amount
 				</label>
-				<input type="number" name="amount" class="form-control" id="amount" placeholder="">
+				<input type="number" name="amount" ngModel class="form-control" id="amount" placeholder="">
 			</div>
 	</div>
 	<div class="form-row">
-		<button class="btn btn-info" (click)="onAdd(formvalue)">Add</button>
-		<button class="btn btn-danger">Delete</button>
-		<button class="btn btn-primary">Clear</button>
+		<button class="btn btn-info">{{!statusEdit?'Add':'Edit'}}</button>
+		<button class="btn btn-danger" *ngIf="statusEdit" (click)="onDelete()" type="button">Delete</button>
+		<button class="btn btn-primary" (click)="onClear()" type="button">Clear</button>
 	</div>
 </form>

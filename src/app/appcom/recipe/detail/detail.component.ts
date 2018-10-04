@@ -31,7 +31,7 @@ export class DetailComponent implements OnInit {
   }
 
   onToShoppingList(detailArr: Array<Ingredient>){
-    this.serviceIngredients.onAdd(detailArr);
+    this.serviceIngredients.onAdd(detailArr,false);
   }
 
 }

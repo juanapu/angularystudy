@@ -1,4 +1,4 @@
-<li class="list-group-item">
+<li class="list-group-item" (click)="onSelectedIngredient()" [ngClass]="{slct: indexNum===selectedIngredients}">
 	<span>{{ingredient.name}}</span>
 	<span class="badge badge-secondary">{{ingredient.number}}</span>
 </li>
