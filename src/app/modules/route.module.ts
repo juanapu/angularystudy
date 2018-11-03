@@ -10,9 +10,9 @@ import { DetailEditComponent } from '../appcom/recipe/detail-edit/detail-edit.co
 
 const appRoutes: Routes = [
 	{ path: '', redirectTo: '/home', pathMatch: 'full'},
-	{ path: 'home', component: RecipeComponent, children: [
-	    { path: '', component: DetailStartComponent, pathMatch: 'full'},
-		{ path: 'new', component: DetailNewComponent},
+	{ path: 'home', component: RecipeComponent,children: [
+	    { path: '', component: DetailStartComponent, pathMatch: 'full',data:{'addIngredients': false}},
+		{ path: 'new', component: DetailNewComponent,data:{'addIngredients': true} },
 		{ path: ':id', component: DetailComponent},
 		{ path: ':id/edit',component: DetailEditComponent }
 	]},

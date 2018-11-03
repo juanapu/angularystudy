@@ -1,14 +1,16 @@
-import { Component, OnInit, ViewChild,EventEmitter,Output } from '@angular/core';
+import { Component, OnInit, OnDestroy,ViewChild,EventEmitter,Output } from '@angular/core';
 import { Ingredient } from '../../../models/ingredient.model';
 import { ServiceIngredients } from '../../../services/ingredients.service';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit,OnDestroy {
 
   @ViewChild('formvalue') formvalue: NgForm;
 
@@ -21,10 +23,12 @@ export class EditComponent implements OnInit {
                               */
   selectedIngredient: Ingredient;
   selectedIndex: number;
+  subscribe: Subscription;
 
   constructor(private serviceIngredient: ServiceIngredients) { }
 
   ngOnInit() {
+    
     const _this = this;
     this.serviceIngredient.statusEdit
       .subscribe(
@@ -33,7 +37,7 @@ export class EditComponent implements OnInit {
           }
         );
 
-    this.serviceIngredient.selectedIngredients
+    this.subscribe = this.serviceIngredient.selectedIngredients
         .subscribe(
           (val: number)=>{
             if(val!==null){
@@ -68,6 +72,10 @@ export class EditComponent implements OnInit {
     this.formvalue.reset();
     this.serviceIngredient.statusEdit.next(false);
     this.serviceIngredient.selectedIngredients.emit(null);
+  }
+
+  ngOnDestroy(){
+    this.subscribe.unsubscribe();
   }
 
 }

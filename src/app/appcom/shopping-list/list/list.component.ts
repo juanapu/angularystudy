@@ -16,10 +16,12 @@ export class SListComponent implements OnInit {
   constructor(private serviceIngredients: ServiceIngredients) { }
 
   ngOnInit() {
+
 		 this.serviceIngredients.selectedIngredients
 		 	.subscribe(
 		 			(val: number)=>{
 		 				 this.selectedIngredients = val;
+
 		 			}
 		 		);
 	}

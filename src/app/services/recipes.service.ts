@@ -25,4 +25,10 @@ export class ServiceRecipes {
 		]
 		)
   ];
+
+  onAdd(val: Recipe){
+    this.recipes.push(val);
+  }
+
+
 }

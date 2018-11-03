@@ -15,6 +15,7 @@ export class ShoppingListComponent implements OnInit {
  constructor(private serviceIngredients: ServiceIngredients){ }
 
  ngOnInit(){
+
  	// this.ingredients = this.serviceIngredients.ingredients;
  	const _this = this;
 
@@ -27,6 +28,5 @@ export class ShoppingListComponent implements OnInit {
  			}
  		)
  }
-
 
 }

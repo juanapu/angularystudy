@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 import { RoutingModule } from './modules/route.module';
 
@@ -36,6 +38,7 @@ import { DetailEditComponent } from './appcom/recipe/detail-edit/detail-edit.com
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RoutingModule
   ],
   providers: [ServiceIngredients],

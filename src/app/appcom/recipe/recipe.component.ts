@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute,Data} from '@angular/router';
 
 import { ListComponent } from './list/list.component';
 import { ServiceRecipes } from '../../services/recipes.service';
@@ -23,6 +23,7 @@ export class RecipeComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
     this.recipe = this.serviceRecipes.recipes;
   }
 
