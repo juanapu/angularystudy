@@ -30,5 +30,9 @@ export class ServiceRecipes {
     this.recipes.push(val);
   }
 
+  onEdit(val: Recipe, index: number){
+    this.recipes[index] = val;
+  }
+
 
 }

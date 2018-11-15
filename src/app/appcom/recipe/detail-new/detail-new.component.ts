@@ -4,6 +4,8 @@ import { ServiceRecipes } from '../../../services/recipes.service';
 import { Recipe } from '../../../models/recipe.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-detail-new',
@@ -28,6 +30,19 @@ export class DetailNewComponent implements OnInit {
   		'desInput': new FormControl(null, Validators.required),
   		'ingredients': new FormArray([])
   	});
+
+
+    // Initialize Firebase
+// TODO: Replace with your project's customized code snippet
+      const config = {
+        apiKey: "AIzaSyDQ3bZunJ6fcbW1X5A8c5ZZZ5S2U-aD_dM",
+        databaseURL: "https://udemy-study-angular.firebaseio.com",
+      };
+      firebase.initializeApp(config);
+
+  const database = firebase.database();
+  console.log('check - database');
+  console.log(database);
   }
 
   onAdd(){
