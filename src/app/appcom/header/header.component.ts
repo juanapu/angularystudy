@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter,Output,Input } from '@angular/core';
+import { ServerService } from '../../services/server.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,19 @@ import { Component, OnInit, EventEmitter,Output,Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   
-  constructor() { };
+  constructor(private serverService: ServerService) { };
 
   ngOnInit() {
+  }
+
+  onSaveServer(){
+  	this.serverService.serverSavedata()
+  		.subscribe(
+  				(response)=>{
+  					console.log(' --- check header save data ---');
+  					console.log(response.json());
+  				}
+  			)
   }
 
 }
