@@ -1,5 +1,9 @@
 import { Component, OnInit, EventEmitter,Output,Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ServerService } from '../../services/server.service';
+import { ServiceRecipes } from '../../services/recipes.service';
+import { Recipe } from '../../models/recipe.model';
+import { Response } from '@angular/http';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +12,11 @@ import { ServerService } from '../../services/server.service';
 })
 export class HeaderComponent implements OnInit {
   
-  constructor(private serverService: ServerService) { };
+  constructor(
+    private serverService: ServerService,
+    private serviceRecipes: ServiceRecipes,
+    private router: Router,
+    ) { };
 
   ngOnInit() {
   }
@@ -17,10 +25,20 @@ export class HeaderComponent implements OnInit {
   	this.serverService.serverSavedata()
   		.subscribe(
   				(response)=>{
-  					console.log(' --- check header save data ---');
   					console.log(response.json());
   				}
   			)
+  }
+
+  onFetchServer(){
+    this.serverService.serverFetchdata()
+      .subscribe(
+          (response: Response)=>{
+            const data: Recipe[] = response.json();
+            this.serviceRecipes.onUpdata(data);
+            this.router.navigate(['/home']);
+          }
+        )
   }
 
 }

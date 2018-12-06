@@ -1,8 +1,11 @@
 import { EventEmitter } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
 import { Ingredient } from '../models/ingredient.model';
+import { Subject } from 'rxjs';
+
 
 export class ServiceRecipes {
+
   recipes: Recipe[ ] = [
   	new Recipe(
   		'A test recipe',
@@ -26,13 +29,26 @@ export class ServiceRecipes {
 		)
   ];
 
+    recipesChanged = new Subject<Recipe[]>();
+
+
   onAdd(val: Recipe){
     this.recipes.push(val);
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   onEdit(val: Recipe, index: number){
     this.recipes[index] = val;
+    this.recipesChanged.next(this.recipes.slice());
   }
 
+  onUpdata(val: Recipe[]){
+    this.recipes = val;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  onGet(){
+  return this.recipes.slice();
+  }
 
 }

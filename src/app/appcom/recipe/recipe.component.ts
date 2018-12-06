@@ -8,8 +8,7 @@ import { Recipe } from '../../models/recipe.model';
 @Component({
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.css'],
-  providers: [ServiceRecipes]
+  styleUrls: ['./recipe.component.css']
 })
 export class RecipeComponent implements OnInit {
   recipe: Recipe[];
@@ -23,8 +22,13 @@ export class RecipeComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-
-    this.recipe = this.serviceRecipes.recipes;
+    this.serviceRecipes.recipesChanged
+      .subscribe(
+            (data: Recipe[]) => {
+              this.recipe = data;
+            }
+        );
+    this.recipe = this.serviceRecipes.onGet();
   }
 
   onDetail(recipe: Recipe){

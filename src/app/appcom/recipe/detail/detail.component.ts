@@ -26,7 +26,8 @@ export class DetailComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .subscribe((param: Params)=>{
-        this.recipe = this.serviceRecipes.recipes.slice()[param.id];
+        let serverdata: Recipe[] = [];
+        this.recipe = this.serviceRecipes.onGet().slice()[param.id];
       });
   }
 
