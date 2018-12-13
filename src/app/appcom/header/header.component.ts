@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter,Output,Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServerService } from '../../services/server.service';
 import { ServiceRecipes } from '../../services/recipes.service';
+import { ServiceAuth } from '../../services/auth.service';
 import { Recipe } from '../../models/recipe.model';
 import { Response } from '@angular/http';
 
@@ -11,14 +12,19 @@ import { Response } from '@angular/http';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
+  auth: boolean = false;
   
   constructor(
     private serverService: ServerService,
     private serviceRecipes: ServiceRecipes,
+    public serviceAuth: ServiceAuth,
     private router: Router,
     ) { };
 
   ngOnInit() {
+    // this.auth = this.serviceAuth.onCheckToken();
+    // console.log(this.auth);
   }
 
   onSaveServer(){
@@ -39,6 +45,10 @@ export class HeaderComponent implements OnInit {
             this.router.navigate(['/home']);
           }
         )
+  }
+
+  onLogout(){
+    this.serviceAuth.onLogout();
   }
 
 }

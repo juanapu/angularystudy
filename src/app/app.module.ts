@@ -18,6 +18,8 @@ import { SListComponent } from './appcom/shopping-list/list/list.component';
 import { ServiceIngredients } from './services/ingredients.service';
 import { ServiceRecipes } from './services/recipes.service';
 import { ServerService } from './services/server.service';
+import { ServiceAuth } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 import { DropdownbtnComponent } from './publiccom/dropdownbtn/dropdownbtn.component';
 import { DetailStartComponent } from './appcom/recipe/detail-start/detail-start.component';
@@ -26,6 +28,8 @@ import { DetailEditComponent } from './appcom/recipe/detail-edit/detail-edit.com
 
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 
 @NgModule({
@@ -41,7 +45,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     DropdownbtnComponent,
     DetailStartComponent,
     DetailNewComponent,
-    DetailEditComponent
+    DetailEditComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ReactiveFormsModule,
     RoutingModule
   ],
-  providers: [ServiceIngredients,ServerService,ServiceRecipes],
+  providers: [ServiceIngredients,ServerService,ServiceRecipes,ServiceAuth,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

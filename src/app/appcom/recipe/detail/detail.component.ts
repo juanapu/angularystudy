@@ -16,6 +16,7 @@ import { Ingredient } from '../../../models/ingredient.model';
 })
 export class DetailComponent implements OnInit {
   recipe: Recipe;
+  routeId: null;
 
   constructor(private serviceRecipes: ServiceRecipes, 
               private serviceIngredients: ServiceIngredients,
@@ -27,12 +28,18 @@ export class DetailComponent implements OnInit {
     this.route.params
       .subscribe((param: Params)=>{
         let serverdata: Recipe[] = [];
+        this.routeId = param.id;
         this.recipe = this.serviceRecipes.onGet().slice()[param.id];
       });
   }
 
   onToShoppingList(detailArr: Array<Ingredient>){
     this.serviceIngredients.onAdd(detailArr,false);
+  }
+
+  onDelete(){
+    // console.log(this.routeId);
+    this.serviceRecipes.onDelete(this.routeId);
   }
 
 }

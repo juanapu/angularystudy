@@ -42,6 +42,11 @@ export class ServiceRecipes {
     this.recipesChanged.next(this.recipes.slice());
   }
 
+  onDelete(index: number){
+    this.recipes.splice(index,1);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
   onUpdata(val: Recipe[]){
     this.recipes = val;
     this.recipesChanged.next(this.recipes.slice());

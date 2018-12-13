@@ -1,18 +1,39 @@
-<ul class="nav nav-plills nav-justified">
-	<li class="nav-brand">
-		Recipe Book
-	</li>
-	<li class="nav-item" routerLinkActive="active">
-		<a routerLink="home" class="nav-link">Recipes</a>
-	</li>
-	<li class="nav-item" routerLinkActive="active">
-		<a routerLink="/shoppinglist" class="nav-link">Shopping List</a>
-	</li>
-	<li class="nav-item dropdown" dropdown>
-		<a class="nav-link dropdown-toggle" dropdownToggle type="button" id="navbarDropdown" role="button">manage</a>
-		<div class="dropdown-menu" aria-labelledby="navbarDropdown" *dropdownMenu>
-			<a class="dropdown-item" type="button" (click)="onSaveServer()">save data</a>
-			<a class="dropdown-item" type="button" (click)="onFetchServer()">fetch data</a>
+<div class="row">
+	<div class="col-sm-8">
+		<ul class="nav nav-plills nav-justified">
+			<li class="nav-brand">
+				Recipe Book
+			</li>
+			<li class="nav-item" routerLinkActive="active">
+				<a routerLink="home" class="nav-link">Recipes</a>
+			</li>
+			<li class="nav-item" routerLinkActive="active">
+				<a routerLink="/shoppinglist" class="nav-link">Shopping List</a>
+			</li>
+		</ul>
+
+	</div>
+	<div class="col-sm-4  d-flex justify-content-end align-item-center my-auto">
+		<div class="row">
+			<div class="col-sm-auto">
+				<button routerLink="/signup" class="btn btn-outline-success">sign up</button>
+			</div>
+			<div class="col-sm-auto" *ngIf="!serviceAuth.onCheckToken()">
+				<button routerLink="/signin" class="btn btn-outline-success">sign in</button>
+			</div>
+			<div class="col-sm-auto">
+				<ng-template [ngIf]="serviceAuth.onCheckToken()">
+					<div class="dropdown" dropdown>
+						<a class="dropdown-toggle" dropdownToggle type="button" id="navbarDropdown" role="button">manage</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" *dropdownMenu>
+							<a class="dropdown-item" type="button" (click)="onSaveServer()">save data</a>
+							<a class="dropdown-item" type="button" (click)="onFetchServer()">fetch data</a>
+							<a class="dropdown-item" type="button" (click)="onLogout()">Log Out</a>
+						</div>	
+					</div>
+				</ng-template>
+			</div>
 		</div>
-	</li>
-</ul>
+	</div>
+</div>
+

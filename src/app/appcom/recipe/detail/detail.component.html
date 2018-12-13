@@ -7,7 +7,7 @@
 		<app-dropdownbtn>
 			<a class="dropdown-item" (click)="onToShoppingList(recipe.ingredientArr)">To shopping list</a>
 			<a class="dropdown-item" routerLink="edit">Edit recipe</a>
-			<a class="dropdown-item">Delete recipe</a>	
+			<a class="dropdown-item" (click)="onDelete()">Delete recipe</a>	
 		</app-dropdownbtn>
 		<p class="card-text">
 			{{recipe.desc}}

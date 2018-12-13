@@ -1,0 +1,11 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+	<div class="form-group">
+		<label for="sigEmail">Email</label>
+		<input formControlName="sigEmail" type="email" name="sigEmail" class="form-control" id="sigEmail" placeholder="Email">
+	</div>
+	<div class="form-group">
+		<label for="sigPw">Password</label>
+		<input formControlName="sigPw" type="password" name="sigPw" class="form-control" id="sigPw" placeholder="Password">
+	</div>
+	<button type="submit" class="btn btn-primary">Sign Up</button>
+</form>
