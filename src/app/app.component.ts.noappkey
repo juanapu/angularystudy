@@ -1,0 +1,28 @@
+import { Component } from '@angular/core';
+import * as firebase from 'firebase';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+
+  ngOnInit(){
+    // Initialize Firebase
+// TODO: Replace with your project's customized code snippet
+      const config = {
+        apiKey: "addyourapikey",
+        authDomain: location.origin,
+        databaseURL: "addyourdatabaseurl",
+      };
+      firebase.initializeApp(config);
+
+  const database = firebase.database();
+  // console.log('check - database');
+  // console.log(database);
+
+
+  }
+
+ }

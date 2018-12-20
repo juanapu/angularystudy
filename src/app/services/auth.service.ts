@@ -1,10 +1,14 @@
 import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+
 
 @Injectable()
 export class ServiceAuth{
 	token:string = null;
+
+	tokenChanged = new Subject;
 
 	constructor(private router: Router){}
 
@@ -35,6 +39,7 @@ export class ServiceAuth{
 	onLogout(){
 		firebase.auth().signOut();
 		this.token = null;
+		this.tokenChanged.next(this.token);
 	}
 
 	onGetToken(){
@@ -42,6 +47,7 @@ export class ServiceAuth{
 			.then(
 					(token: string)=>{
 						this.token = token;
+						this.tokenChanged.next(this.token);
 					}
 				)
 		return this.token;

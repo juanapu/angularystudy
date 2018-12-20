@@ -30,8 +30,8 @@ export class HeaderComponent implements OnInit {
   onSaveServer(){
   	this.serverService.serverSavedata()
   		.subscribe(
-  				(response)=>{
-  					console.log(response.json());
+  				(data: Recipe[])=>{
+  					console.log(data);
   				}
   			)
   }
@@ -39,11 +39,16 @@ export class HeaderComponent implements OnInit {
   onFetchServer(){
     this.serverService.serverFetchdata()
       .subscribe(
-          (response: Response)=>{
-            const data: Recipe[] = response.json();
+          // (response: Response)=>{
+          //   const data: Recipe[] = response.json();
+          //   this.serviceRecipes.onUpdata(data);
+          //   this.router.navigate(['/home']);
+          // }
+           (data: Recipe[])=>{
+            console.log(data);
             this.serviceRecipes.onUpdata(data);
             this.router.navigate(['/home']);
-          }
+           }
         )
   }
 

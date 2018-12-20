@@ -75,4 +75,8 @@ export class DetailEditComponent implements OnInit {
     this.serviceRecipes.onEdit(newIngredient,currentId);
   }
 
+  getcontrols(){
+    return this.newRecipeForm.get('ingredients');
+  }
+
 }

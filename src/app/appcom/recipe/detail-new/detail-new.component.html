@@ -16,7 +16,7 @@
 		<input formControlName="desInput" class="form-control" type="textarea" name="desInput" id="desInput">
 	</div>
 	<div formArrayName="ingredients">
-		<div class="form-group row {{i}}" *ngFor="let arrIngre of newRecipeForm.get('ingredients').controls; let i = index" [formGroupName]="i">
+		<div class="form-group row {{i}}" *ngFor="let arrIngre of getControl()['controls']; let i = index" [formGroupName]="i">
 			<div class="col-md-8">
 				<input formControlName="name" class="form-control" type="text" name="name" id="name">
 			</div>

@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { ServiceRecipes } from './recipes.service';
-import { ServiceAuth } from './auth.service';
+import { Recipe } from '../models/recipe.model';
 
 @Injectable()
 export class ServerService{
-	constructor(private http: Http, 
+	constructor(private http: HttpClient, 
 		private serviceRecipes: ServiceRecipes,
-		private serviceAuth: ServiceAuth){ }
+		){ }
     
     serverSavedata(){
     	const data = this.serviceRecipes.onGet();
-    	const token = this.serviceAuth.onGetToken();
-    	return this.http.put('https://udemy-study-angular-fbb36.firebaseio.com/recipes.json?auth='+token,data);
+    	// return this.http.put('https://udemy-study-angular-fbb36.firebaseio.com/recipes.json?auth='+token,data);
+        return this.http.put('https://udemy-study-angular-fbb36.firebaseio.com/recipes.json',data);
     }
 
     serverFetchdata(){
-    	const token = this.serviceAuth.onGetToken();
-    	return this.http.get('https://udemy-study-angular-fbb36.firebaseio.com/recipes.json?auth='+token); 
+    	// return this.http.get<Recipe[]>('https://udemy-study-angular-fbb36.firebaseio.com/recipes.json?auth='+token); 
+        return this.http.get<Recipe[]>('https://udemy-study-angular-fbb36.firebaseio.com/recipes.json'); 
     }
 
 }

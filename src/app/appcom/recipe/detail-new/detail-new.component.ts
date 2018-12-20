@@ -64,4 +64,8 @@ export class DetailNewComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  getControl(){
+    return this.newRecipeForm.get('ingredients');
+  }
+
 }
