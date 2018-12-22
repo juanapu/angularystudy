@@ -1,4 +1,7 @@
 import { Component, OnInit, AfterViewChecked,AfterViewInit,AfterContentInit,AfterContentChecked,Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import * as ShoppingListActions from '../../../ngrx/shopping-list.actions';
 
 import { Router, ActivatedRoute, ParamMap,Params } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -21,7 +24,8 @@ export class DetailComponent implements OnInit {
   constructor(private serviceRecipes: ServiceRecipes, 
               private serviceIngredients: ServiceIngredients,
               private route: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private store: Store<{shoppingList:{ingredients: Ingredient[]}}>
               ) { }
 
   ngOnInit() {
@@ -34,7 +38,8 @@ export class DetailComponent implements OnInit {
   }
 
   onToShoppingList(detailArr: Array<Ingredient>){
-    this.serviceIngredients.onAdd(detailArr,false);
+    // this.serviceIngredients.onAdd(detailArr,false);
+    this.store.dispatch(new ShoppingListActions.AddIngredients(detailArr));
   }
 
   onDelete(){
