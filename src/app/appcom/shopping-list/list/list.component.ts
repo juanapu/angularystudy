@@ -35,7 +35,6 @@ export class SListComponent implements OnInit {
 		  this.store.select('shoppingList')
 		    .subscribe(
 		 		data => {
-		 			console.log(data);
 		 			this.selectedIngredients = data.selectedIngredient;
 		 		}
 		 	)

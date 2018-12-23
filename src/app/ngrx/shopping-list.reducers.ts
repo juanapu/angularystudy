@@ -37,6 +37,12 @@ export function shoppingListReducer( state = initialState, action: ShoppingListA
 				...state,
 				selectedIngredient: action.payload	
 			};
+		case ShoppingListActions.UPDATE_INGREDIENT:
+			return {
+				...state,
+				ingredients: action.payload.ingredients,
+				selectedIngredient: action.payload.selectedIngredient
+			}
 		default:
 			return state;
 	}

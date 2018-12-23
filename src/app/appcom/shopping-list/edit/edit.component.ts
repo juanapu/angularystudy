@@ -27,6 +27,7 @@ export class EditComponent implements OnInit,OnDestroy {
                                    click Edit button -> statusEdit = false
                               */
   selectedIngredient: Ingredient;
+  originalIngredients: Ingredient[];
   selectedIndex: number;
   subscribe: Subscription;
 
@@ -62,14 +63,16 @@ export class EditComponent implements OnInit,OnDestroy {
       .subscribe(
           data => {
                 this.selectedIndex = data.selectedIngredient;
+                this.originalIngredients = data.ingredients;
+                this.selectedIngredient = data.ingredients[data.selectedIngredient];
                if(this.selectedIndex>-1){
-                    this.selectedIngredient = data.ingredients[data.selectedIngredient];
                     this.formvalue.setValue({
                       name: this.selectedIngredient.name,
                       amount: this.selectedIngredient.number
                     })
-               }
-
+               }else{
+                this.formvalue.reset()
+              }
           }
         )
 
@@ -77,9 +80,19 @@ export class EditComponent implements OnInit,OnDestroy {
 
   onSubmit(form: NgForm){
   	const addIngredient = new Ingredient(form.value.name,form.value.amount);
+
     if(this.statusEdit){
-      this.serviceIngredient.onUpdate(addIngredient, this.selectedIndex);
-      this.serviceIngredient.selectedIngredients.emit(null); // remove all selectedIngredients
+      const newIngredients = this.originalIngredients.slice();
+      newIngredients[this.selectedIndex] =  addIngredient;
+
+      const newState = {
+        ingredients: newIngredients,
+        selectedIngredient: -1
+      }
+
+      // this.serviceIngredient.onUpdate(addIngredient, this.selectedIndex);
+      // this.serviceIngredient.selectedIngredients.emit(null); // remove all selectedIngredients
+      this.store.dispatch(new ShoppingListActions.UpdateIngredient(newState));
     }else{
       // this.serviceIngredient.onAdd(addIngredient,this.statusEdit);
       this.store.dispatch(new ShoppingListActions.AddIngredient(addIngredient));
@@ -93,8 +106,8 @@ export class EditComponent implements OnInit,OnDestroy {
 
   onClear(){
     this.formvalue.reset();
-    this.serviceIngredient.statusEdit.next(false);
-    this.serviceIngredient.selectedIngredients.emit(null);
+    // this.serviceIngredient.statusEdit.next(false);
+    // this.serviceIngredient.selectedIngredients.emit(null);
   }
 
   ngOnDestroy(){
